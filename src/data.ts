@@ -1,10 +1,10 @@
-type question = {
+export type question = {
   question: string;
   answers: string[];
   correctAnswer: number;
 };
 
-const quizQuestions: question[] = [
+export const quizQuestions: question[] = [
   {
     question: "Who was the first presenter of the absolute hit television show Deal or No Deal?",
     answers: ["Dwain The Rock Johnson", "Mary Berry", "Noel Edmunds", "Mr Blobby"],
