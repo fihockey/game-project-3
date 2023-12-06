@@ -12,8 +12,10 @@ const answerContainerThree =
   document.querySelector<HTMLParagraphElement>("#answer-three");
 const answerContainerFour =
   document.querySelector<HTMLParagraphElement>("#answer-four");
-const nextQuestion = 
-  document.querySelector<HTMLButtonElement>("#next-question")
+const nextQuestionButton = 
+  document.querySelector<HTMLButtonElement>("#next-question");
+const startAgainButton = 
+  document.querySelector<HTMLBRElement>("#start-again")
 
 if (
   !questionContainer ||
@@ -21,7 +23,8 @@ if (
   !answerContainerTwo ||
   !answerContainerThree ||
   !answerContainerFour ||
-  !nextQuestion
+  !nextQuestionButton ||
+  !startAgainButton
 ) {
   throw new Error("Issue with the containers");
 }
@@ -30,15 +33,15 @@ if (
 // ACCESS QUESTION THROUGH INDEX
 // ADD DISPLAY FUNCTION
 
-const displayQuestion = (index : number) => {
-  const question = quizQuestions [index].question;
+const displayQuestion = (currentQuestion : number) => {
+  const question = quizQuestions [currentQuestion].question;
   questionContainer.innerHTML = question
 }
 
 displayQuestion(currentQuestion)
 
-
-const displayAnswers = () => {
+// ANSWERS ON THE SCREEN
+const displayAnswers = (currentQuestion : number) => {
   const answerOne = quizQuestions [currentQuestion].answers[0];
   answerContainerOne.innerHTML = answerOne;
   const answerTwo = quizQuestions [currentQuestion].answers[1];
@@ -49,26 +52,39 @@ const displayAnswers = () => {
   answerContainerFour.innerHTML = answerFour;
 }
 
-displayAnswers()
+displayAnswers(currentQuestion)
 
 
 
-// ANSWERS ON THE SCREEN
+
 
 // ANSWERS NEED TO BE CLCIKABLE AND SHOW UP RIGHT OR WRONG (turn green/red)
 
 // WHEN THE ANSWER IS RIGHT THE SEGMENTS IN THE PROGRESS BAR NEED TO LIGHT UP BY ONE
 // WHEN THE ANSWER IF WRONG THE SEGMENTS NEED TO STAY THE SAME
+// USE IF / ELSE IF STANTEMENTS TO ORGANISE RIGHT OR WRONG ANSWERS. E.G. THIS IS 
+
+
 
 // NEXT BUTTON TO GO TO THE NEXT QUESTION
 //(MOVE TO THE NEXT INDEX/QUESTION EVERYTIME THE NEXT ARROW IS CLICKED)
 // HAVE THIS BUTTON HAVE A COUNT TO UPDATE THE QUESTION NUMBER BY 1.
 
-
-
 const handleIncrementQuestion = (event : Event) => {
-  currentQuestion++ 
-  console.log(currentQuestion)
+  event.target as HTMLButtonElement;
+ currentQuestion++ 
+ displayQuestion(currentQuestion)
+ displayAnswers(currentQuestion)
 }
 
-nextQuestion.addEventListener("click", handleIncrementQuestion);
+nextQuestionButton.addEventListener("click", handleIncrementQuestion);
+
+
+// BUTTON THAT TAKES YOU BACK TO THE START OF THE QUIZ
+
+const handleStartAgain = (event : Event) => {
+  event.target as HTMLButtonElement;
+  window.location.reload()
+}
+
+startAgainButton.addEventListener("click", handleStartAgain)
