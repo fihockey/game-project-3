@@ -1,0 +1,21 @@
+@use "./_variables.scss" as *;
+
+.default-answer {
+    background-color: white;
+}
+
+.wrong-answer {
+    background-color: red;
+}
+
+.correct-answer {
+    background-color: green;
+}
+
+.progress__bar-active {
+
+}
+
+.progress__bar-inactive {
+    
+}
