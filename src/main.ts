@@ -25,6 +25,7 @@ const nextQuestionButton =
 const startAgainButton = 
   document.querySelector<HTMLButtonElement>("#start-again");
 
+
 if (
   !questionContainer ||
   !answerContainerOne ||
@@ -61,6 +62,7 @@ const displayAnswers = (currentQuestion: number) => {
 };
 
 displayAnswers(currentQuestion);
+
 
 const displayScore = (score: number) => {
   const money = winnings[score].moneyValue
@@ -102,7 +104,6 @@ const turnButtonGreen = (button: HTMLButtonElement) => {
 const turnButtonRed = (button: HTMLButtonElement) => {
   button.classList.add("wrong-answer")
 };
-
 
 answerButtons.forEach((button) => {
   button.addEventListener("click",handleCorrectAnswer);
