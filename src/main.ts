@@ -2,6 +2,7 @@ import "./main.scss";
 import { quizQuestions, question } from "./data.ts";
 
 let currentQuestion = 0;
+let isAnswerSelected: boolean[] = Array(quizQuestions.length).fill(false);
 
 const questionContainer =
   document.querySelector<HTMLParagraphElement>("#question");
@@ -14,7 +15,7 @@ const answerContainerThree =
 const answerContainerFour =
   document.querySelector<HTMLButtonElement>("#answer-four");
 const answerButtons =
-  document.querySelectorAll<HTMLButtonElement>(".answer-buttons")
+  document.querySelectorAll<HTMLButtonElement>(".answers")
 const nextQuestionButton =
   document.querySelector<HTMLButtonElement>("#next-question");
 const startAgainButton = 
@@ -33,9 +34,6 @@ if (
 }
 
 // QUESTIONS ON THE SCREEN
-// ACCESS QUESTION THROUGH INDEX
-// ADD DISPLAY FUNCTION
-
 const displayQuestion = (currentQuestion: number) => {
   const question = quizQuestions[currentQuestion].question;
   questionContainer.innerHTML = question;
@@ -57,48 +55,55 @@ const displayAnswers = (currentQuestion: number) => {
 
 displayAnswers(currentQuestion);
 
-// ANSWERS NEED TO BE CLCIKABLE AND SHOW UP RIGHT OR WRONG (turn green/red)
 
-const handleCorrectAnswer = (event: Event, question: question) => {
+// WHEN THE ANSWER IS RIGHT THE SEGMENTS IN THE PROGRESS BAR NEED TO LIGHT UP BY ONE
+// WHEN THE ANSWER IS WRONG THE SEGMENTS NEED TO STAY THE SAME
+// USE IF / ELSE IF STANTEMENTS TO ORGANISE RIGHT OR WRONG ANSWERS. E.G. THIS IS
+
+const handleCorrectAnswer = (event: Event) => {
   const button = event.target as HTMLButtonElement;
-  let correctAnswer = question.answers[question.correctAnswer];
-  if (button.innerText === correctAnswer) {
+
+  const correctAnswer = quizQuestions[currentQuestion].correctAnswer
+  const selectedAnswer = Number(button.value)
+  if(selectedAnswer == correctAnswer) {
     turnButtonGreen(button);
     // EXECUTE FUNCTION THAT MOVES THE PROGRESS BAR ON
   } else {
     turnButtonRed(button);
   }
+  answerButtons.forEach((answerButtons) => {
+  answerButtons.disabled = true;
+  })
 };
 
 const turnButtonGreen = (button: HTMLButtonElement) => {
-  button.style.backgroundColor = "green";
+  button.classList.add("correct-answer")
 };
 
 const turnButtonRed = (button: HTMLButtonElement) => {
-  button.style.backgroundColor = "red";
+  button.classList.add("wrong-answer")
 };
 
 
 answerButtons.forEach((button) => {
-  button.addEventListener("click", (event) => handleCorrectAnswer(event, quizQuestions[currentQuestion]));
+  button.addEventListener("click",handleCorrectAnswer);
 });
 
-
-// answerButtons.forEach((button) => {
-//   button.addEventListener("click", handleCorrectAnswer);
-// });
-
-// WHEN THE ANSWER IS RIGHT THE SEGMENTS IN THE PROGRESS BAR NEED TO LIGHT UP BY ONE
-// WHEN THE ANSWER IF WRONG THE SEGMENTS NEED TO STAY THE SAME
-// USE IF / ELSE IF STANTEMENTS TO ORGANISE RIGHT OR WRONG ANSWERS. E.G. THIS IS
 
 // NEXT BUTTON TO GO TO THE NEXT QUESTION
 //(MOVE TO THE NEXT INDEX/QUESTION EVERYTIME THE NEXT ARROW IS CLICKED)
 // HAVE THIS BUTTON HAVE A COUNT TO UPDATE THE QUESTION NUMBER BY 1.
-
+// ANSWER BUTTON COLOURS NEED TO RESET ONCE THE NEXT QUESTION BUTTON HAS BEEN PRESSED
 const handleIncrementQuestion = (event: Event) => {
   event.target as HTMLButtonElement;
   currentQuestion++;
+  console.log(answerButtons)
+  answerButtons.forEach((answerButtons) => {
+    answerButtons.classList.add("default-answer")
+    answerButtons.classList.replace("correct-answer", "default-answer")
+    answerButtons.classList.replace("wrong-answer", "default-answer")
+    answerButtons.disabled = false;
+  })
   displayQuestion(currentQuestion);
   displayAnswers(currentQuestion);
 };
