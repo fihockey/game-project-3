@@ -4,6 +4,11 @@ export type question = {
   correctAnswer: number;
 };
 
+export type moneyValue = {
+    moneyValue: string;
+};
+
+
 export const quizQuestions: question[] = [
   {
     question: "Who was the first presenter of the absolute hit television show Deal or No Deal?",
@@ -31,7 +36,7 @@ export const quizQuestions: question[] = [
 
   {
     question: "Why do we use Event Listeners?",
-  answers: ["To get notified when the new verion of Node has dropped", "To get access to object values and variables", "To execute a function once an event has happened", "To spy on Winnie The Pooh organising a top secret honey raid"],
+  answers: ["To get notified when the new version of Node has dropped", "To get access to object values and variables", "To execute a function once an event has happened", "To spy on Winnie The Pooh organising a top secret honey raid"],
   correctAnswer: 2, 
   },
 
@@ -39,42 +44,36 @@ export const quizQuestions: question[] = [
     question: "Who is the greatest quiz developer this world has ever seen?",
   answers: ["Fiona", "Fi", "Fifi", "The Hockinator"],
   correctAnswer: 3, 
-  },
-
-//   {
-//     question: "",
-//   answers: [""],
-//   correctAnswer: , 
-//   }
-
-//   {
-//     question: "",
-//   answers: [""],
-//   correctAnswer: , 
-//   }
-
-//   {
-//     question: "",
-//   answers: [""],
-//   correctAnswer: , 
-//   }
-
-//   {
-//     question: "",
-//   answers: [""],
-//   correctAnswer: , 
-//   }
-
-//   {
-//     question: "",
-//   answers: [""],
-//   correctAnswer: , 
-//   }
-
-//   {
-//     question: "",
-//   answers: [""],
-//   correctAnswer: , 
-//   }
-    
+  },    
 ];
+
+
+export const winnings: moneyValue[] = [
+    {
+        moneyValue: "0"
+    },
+
+    {
+        moneyValue: "1p"
+    },
+
+    {
+        moneyValue: "£5"
+    },
+
+    {
+        moneyValue: "£250"
+    },
+
+    {
+        moneyValue: "£5,000"
+    },
+
+    {
+        moneyValue: "£50,000"
+    },
+
+    {
+        moneyValue: "£250,000"
+    },
+]

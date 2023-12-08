@@ -1,8 +1,10 @@
 import "./main.scss";
 import { quizQuestions, question } from "./data.ts";
+import { winnings, moneyValue} from "./data.ts";
 
 let currentQuestion = 0;
-let isAnswerSelected: boolean[] = Array(quizQuestions.length).fill(false);
+let score = 0;
+
 
 const questionContainer =
   document.querySelector<HTMLParagraphElement>("#question");
@@ -15,7 +17,9 @@ const answerContainerThree =
 const answerContainerFour =
   document.querySelector<HTMLButtonElement>("#answer-four");
 const answerButtons =
-  document.querySelectorAll<HTMLButtonElement>(".answers")
+  document.querySelectorAll<HTMLButtonElement>(".answers");
+const scoreContainer =
+  document.querySelector<HTMLParagraphElement>(".score__container");
 const nextQuestionButton =
   document.querySelector<HTMLButtonElement>("#next-question");
 const startAgainButton = 
@@ -27,13 +31,16 @@ if (
   !answerContainerTwo ||
   !answerContainerThree ||
   !answerContainerFour ||
+  !answerButtons ||
+  !scoreContainer ||
   !nextQuestionButton ||
-  !startAgainButton
+  !startAgainButton 
+  
 ) {
   throw new Error("Issue with the containers");
 }
 
-// QUESTIONS ON THE SCREEN
+
 const displayQuestion = (currentQuestion: number) => {
   const question = quizQuestions[currentQuestion].question;
   questionContainer.innerHTML = question;
@@ -41,7 +48,7 @@ const displayQuestion = (currentQuestion: number) => {
 
 displayQuestion(currentQuestion);
 
-// ANSWERS ON THE SCREEN
+
 const displayAnswers = (currentQuestion: number) => {
   const answerOne = quizQuestions[currentQuestion].answers[0];
   answerContainerOne.innerHTML = answerOne;
@@ -55,25 +62,37 @@ const displayAnswers = (currentQuestion: number) => {
 
 displayAnswers(currentQuestion);
 
+const displayScore = (score: number) => {
+  const money = winnings[score].moneyValue
+  scoreContainer.innerHTML = money
+}
 
-// WHEN THE ANSWER IS RIGHT THE SEGMENTS IN THE PROGRESS BAR NEED TO LIGHT UP BY ONE
-// WHEN THE ANSWER IS WRONG THE SEGMENTS NEED TO STAY THE SAME
-// USE IF / ELSE IF STANTEMENTS TO ORGANISE RIGHT OR WRONG ANSWERS. E.G. THIS IS
+displayScore(score);
+
 
 const handleCorrectAnswer = (event: Event) => {
   const button = event.target as HTMLButtonElement;
 
   const correctAnswer = quizQuestions[currentQuestion].correctAnswer
   const selectedAnswer = Number(button.value)
-  if(selectedAnswer == correctAnswer) {
+  if (selectedAnswer == correctAnswer) {
     turnButtonGreen(button);
-    // EXECUTE FUNCTION THAT MOVES THE PROGRESS BAR ON
+    score++
   } else {
     turnButtonRed(button);
   }
+
+  if (currentQuestion === 5) {
+      nextQuestionButton.innerHTML = "PRIZE"
+    } else {
+      nextQuestionButton.innerHTML = "Next Question"
+    }
+
   answerButtons.forEach((answerButtons) => {
   answerButtons.disabled = true;
   })
+
+  displayScore(score)
 };
 
 const turnButtonGreen = (button: HTMLButtonElement) => {
@@ -90,14 +109,9 @@ answerButtons.forEach((button) => {
 });
 
 
-// NEXT BUTTON TO GO TO THE NEXT QUESTION
-//(MOVE TO THE NEXT INDEX/QUESTION EVERYTIME THE NEXT ARROW IS CLICKED)
-// HAVE THIS BUTTON HAVE A COUNT TO UPDATE THE QUESTION NUMBER BY 1.
-// ANSWER BUTTON COLOURS NEED TO RESET ONCE THE NEXT QUESTION BUTTON HAS BEEN PRESSED
-const handleIncrementQuestion = (event: Event) => {
+const handleIncrementQuestion = (event : Event) => {
   event.target as HTMLButtonElement;
   currentQuestion++;
-  console.log(answerButtons)
   answerButtons.forEach((answerButtons) => {
     answerButtons.classList.add("default-answer")
     answerButtons.classList.replace("correct-answer", "default-answer")
@@ -110,7 +124,28 @@ const handleIncrementQuestion = (event: Event) => {
 
 nextQuestionButton.addEventListener("click", handleIncrementQuestion);
 
-// BUTTON THAT TAKES YOU BACK TO THE START OF THE QUIZ
+// const handlePrizeButton = (event : Event) => {
+//   event.target as HTMLButtonElement;
+//   if (nextQuestionButton.innerHTML === "PRIZE") {
+//     questionContainer &&
+//   answerContainerOne &&
+//   answerContainerTwo &&
+//   answerContainerThree &&
+//   answerContainerFour &&
+//   nextQuestionButton &&
+//   startAgainButton.style.display == "none"
+//   } else {
+//     questionContainer &&
+//   answerContainerOne &&
+//   answerContainerTwo &&
+//   answerContainerThree &&
+//   answerContainerFour &&
+//   nextQuestionButton &&
+//   startAgainButton.style.display == "block"
+//   }
+// }
+
+// nextQuestionButton.addEventListener("click",handlePrizeButton)
 
 const handleStartAgain = (event: Event) => {
   event.target as HTMLButtonElement;
@@ -118,3 +153,6 @@ const handleStartAgain = (event: Event) => {
 };
 
 startAgainButton.addEventListener("click", handleStartAgain);
+
+
+// WHEN THE PRIZE BUTTON IS PRESSED ALL OTHER ELEMENTS DISSAPEAR AND THE BOX APPEARS IN THE CENTRE OF THE SCREEN WITH CONFETTI
