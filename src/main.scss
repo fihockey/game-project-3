@@ -1,5 +1,7 @@
 @use "./_variables.scss" as *;
 
+@use "./buttons"as *;
+
 .default-answer {
     background-color: white;
 }
@@ -12,10 +14,34 @@
     background-color: green;
 }
 
-.progress__bar-active {
+body {
+    background-color: $secondary-color;
+}
+
+#header {
+
+    font-family: $primary-font;
+    color: $tertiary-color;
+    display: flex;
+    justify-content: center;
+    font-size: 35px;
 
 }
 
-.progress__bar-inactive {
-    
+h1 {
+
+    display: flex;
+    justify-content: center;
+}
+
+#question {
+
+    color: $tertiary-color;
+    font-family: $secondary-font;
+
+}
+
+.score {
+
+    color: $tertiary-color;
 }
