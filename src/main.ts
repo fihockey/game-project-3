@@ -1,6 +1,7 @@
 import "./main.scss";
 import { quizQuestions, question } from "./data.ts";
 import { winnings, moneyValue} from "./data.ts";
+import confetti, { Options } from "canvas-confetti"
 
 let currentQuestion = 0;
 let score = 0;
@@ -18,6 +19,8 @@ const answerContainerFour =
   document.querySelector<HTMLButtonElement>("#answer-four");
 const answerButtons =
   document.querySelectorAll<HTMLButtonElement>(".answers");
+const scoreTitle =
+  document.querySelector<HTMLHeadingElement>(".score__title");
 const scoreContainer =
   document.querySelector<HTMLParagraphElement>(".score__container");
 const nextQuestionButton =
@@ -33,6 +36,7 @@ if (
   !answerContainerThree ||
   !answerContainerFour ||
   !answerButtons ||
+  !scoreTitle ||
   !scoreContainer ||
   !nextQuestionButton ||
   !startAgainButton 
@@ -86,6 +90,7 @@ const handleCorrectAnswer = (event: Event) => {
 
   if (currentQuestion === 5) {
       nextQuestionButton.innerHTML = "PRIZE"
+      startAgainButton.style.display = "none"
     } else {
       nextQuestionButton.innerHTML = "Next Question"
     }
@@ -105,14 +110,35 @@ const turnButtonRed = (button: HTMLButtonElement) => {
   button.classList.add("wrong-answer")
 };
 
-answerButtons.forEach((button) => {
-  button.addEventListener("click",handleCorrectAnswer);
-});
+
 
 
 const handleIncrementQuestion = (event : Event) => {
   event.target as HTMLButtonElement;
-  currentQuestion++;
+  if (nextQuestionButton.innerHTML === "PRIZE") {
+
+  questionContainer.style.display = "none"
+  answerContainerOne.style.display = "none"
+  answerContainerTwo.style.display = "none"
+  answerContainerThree.style.display = "none"
+  answerContainerFour.style.display = "none"
+  nextQuestionButton.style.display = "none"
+  startAgainButton.style.display = "block"
+
+  scoreTitle.style.fontSize = "50px"
+  scoreContainer.style.fontSize = "40px"
+
+  const options : Options = {
+    particleCount: 150,
+    spread: 150,
+    colors: ["#C81109", "#EF680A", "#F6B91E"]
+  }
+
+  confetti(options)
+  
+
+  } else {
+    currentQuestion++;
   answerButtons.forEach((answerButtons) => {
     answerButtons.classList.add("default-answer")
     answerButtons.classList.replace("correct-answer", "default-answer")
@@ -121,39 +147,20 @@ const handleIncrementQuestion = (event : Event) => {
   })
   displayQuestion(currentQuestion);
   displayAnswers(currentQuestion);
+
+  }
+
 };
 
-nextQuestionButton.addEventListener("click", handleIncrementQuestion);
-
-// const handlePrizeButton = (event : Event) => {
-//   event.target as HTMLButtonElement;
-//   if (nextQuestionButton.innerHTML === "PRIZE") {
-//     questionContainer &&
-//   answerContainerOne &&
-//   answerContainerTwo &&
-//   answerContainerThree &&
-//   answerContainerFour &&
-//   nextQuestionButton &&
-//   startAgainButton.style.display == "none"
-//   } else {
-//     questionContainer &&
-//   answerContainerOne &&
-//   answerContainerTwo &&
-//   answerContainerThree &&
-//   answerContainerFour &&
-//   nextQuestionButton &&
-//   startAgainButton.style.display == "block"
-//   }
-// }
-
-// nextQuestionButton.addEventListener("click",handlePrizeButton)
 
 const handleStartAgain = (event: Event) => {
   event.target as HTMLButtonElement;
   window.location.reload();
 };
 
+
+answerButtons.forEach((button) => {
+  button.addEventListener("click",handleCorrectAnswer);
+});
+nextQuestionButton.addEventListener("click", handleIncrementQuestion);
 startAgainButton.addEventListener("click", handleStartAgain);
-
-
-// WHEN THE PRIZE BUTTON IS PRESSED ALL OTHER ELEMENTS DISSAPEAR AND THE BOX APPEARS IN THE CENTRE OF THE SCREEN WITH CONFETTI
