@@ -50,7 +50,7 @@ export const quizQuestions: question[] = [
 
 export const winnings: moneyValue[] = [
     {
-        moneyValue: "0"
+        moneyValue: "£0"
     },
 
     {

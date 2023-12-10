@@ -28,20 +28,81 @@ body {
 
 }
 
-h1 {
-
-    display: flex;
-    justify-content: center;
-}
-
 #question {
 
     color: $tertiary-color;
     font-family: $secondary-font;
+    font-size: 20px;
+    text-align: center;
 
 }
 
 .score {
-
     color: $tertiary-color;
+    padding: 80px;
+
+    &__title {
+        font-family: $primary-font;
+        display: flex;
+        justify-content: center;
+    }
+
+    &__container {
+        font-family: $secondary-font;
+        display: flex;
+        justify-content: center;
+    }
 }
+
+@media screen and (min-width: $tablet-breakpoint) {
+
+    #header {
+        font-size: 60px;
+    
+    }
+    
+    #question {
+        font-size: 35px;
+    
+    }
+    
+    .score {
+        padding: 40px;
+    
+        &__title {
+           font-size: 50px;
+        }
+    
+        &__container {
+            font-size: 50px;
+        }
+    }
+
+}
+
+@media screen and (min-width: $laptop-breakpoint) {
+
+    #header {
+        font-size: 60px;
+    
+    }
+    
+    #question {
+        font-size: 35px;
+    
+    }
+    
+    .score {
+        padding: 5px;
+    
+        &__title {
+           font-size: 50px;
+        }
+    
+        &__container {
+            font-size: 50px;
+        }
+    }
+
+}
+

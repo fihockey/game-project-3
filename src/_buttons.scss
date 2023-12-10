@@ -3,7 +3,7 @@
 .answer-buttons {
 
     display: grid;
-    grid-template-columns: repeat(4, 80px);
+    grid-template-columns: repeat(4, 90px);
     grid-template-rows: repeat(2, 80px);
     gap: 10px;
 
@@ -12,25 +12,25 @@
 #answer-one {
     grid-column: 1 / 3;
     font-family: $primary-font;
-    font-size: 20px;
+    font-size: 16px;
 }
 
 #answer-two {
     grid-column: 3 / 5;
     font-family: $primary-font;
-    font-size: 20px;
+    font-size: 16px;
 }
 
 #answer-three {
     grid-column: 1 / 3;
     font-family: $primary-font;
-    font-size: 20px;
+    font-size: 16px;
 }
 
 #answer-four {
     grid-column: 3 / 5;
     font-family: $primary-font;
-    font-size: 20px;
+    font-size: 16px;
 }
 
 .answer-buttons-grid {
@@ -40,13 +40,129 @@
 
 }
 
+.navigation-buttons {
+
+    display: grid;
+    grid-template-columns: repeat(8, 40px);
+    grid-template-rows: repeat(1, 40px);
+    gap: 10px;
+
+}
+
 
 #next-question {
-
+    grid-column: 6 / 8;
+    font-family: $primary-font;
+    font-size: 12px;
 
 }
 
 #start-again {
+    grid-column: 2 / 4;
+    font-family: $primary-font;
+    font-size: 12px;
+}
 
+.navigation-buttons-grid {
+
+    display: flex;
+    justify-content: center;
+}
+
+
+@media screen and (min-width: $tablet-breakpoint) {
+
+    .answer-buttons {
+
+        display: grid;
+        grid-template-columns: repeat(4, 160px);
+        grid-template-rows: repeat(2, 130px);
+        gap: 10px;
+
+    }
+
+    #answer-one {
+        font-size: 22px;
+    }
+
+    #answer-two {
+        font-size: 22px;
+    }
+
+    #answer-three {
+        font-size: 22px;
+    }
+
+    #answer-four {
+        font-size: 22px;
+    }
+
+    .navigation-buttons {
+
+        display: grid;
+        grid-template-columns: repeat(8, 80px);
+        grid-template-rows: repeat(1, 80px);
+        gap: 10px;
+
+    }
+
+
+    #next-question {
+        font-size: 22px;
+
+    }
+
+    #start-again {
+        font-size: 22px;
+    }
+
+}
+
+
+@media screen and (min-width: $laptop-breakpoint) {
+
+    .answer-buttons {
+
+        display: grid;
+        grid-template-columns: repeat(4, 240px);
+        grid-template-rows: repeat(2, 60px);
+        gap: 10px;
+
+    }
+
+    #answer-one {
+        font-size: 18px;
+    }
+
+    #answer-two {
+        font-size: 18px;
+    }
+
+    #answer-three {
+        font-size: 18px;
+    }
+
+    #answer-four {
+        font-size: 18px;
+    }
+
+    .navigation-buttons {
+
+        display: grid;
+        grid-template-columns: repeat(8, 80px);
+        grid-template-rows: repeat(1, 35px);
+        gap: 10px;
+
+    }
+
+
+    #next-question {
+        font-size: 18px;
+
+    }
+
+    #start-again {
+        font-size: 18px;
+    }
 
 }
