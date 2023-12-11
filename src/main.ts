@@ -1,6 +1,6 @@
 import "./main.scss";
-import { quizQuestions, question } from "./data.ts";
-import { winnings, moneyValue} from "./data.ts";
+import { quizQuestions } from "./data.ts";
+import { winnings } from "./data.ts";
 import confetti, { Options } from "canvas-confetti"
 
 let currentQuestion = 0;
