@@ -135,7 +135,6 @@ const handleIncrementQuestion = (event : Event) => {
   }
 
   confetti(options)
-  
 
   } else {
     currentQuestion++;

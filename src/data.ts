@@ -12,7 +12,7 @@ export type moneyValue = {
 export const quizQuestions: question[] = [
   {
     question: "Who was the first presenter of the absolute hit television show Deal or No Deal?",
-    answers: ["Dwayne The Rock Johnson", "Mary Berry", "Noel Edmunds", "Mr Blobby"],
+    answers: ["Dwayne The Rock Johnson", "Mary Berry", "Noel Edmonds", "Mr Blobby"],
     correctAnswer: 2,
   },
 
